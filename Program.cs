@@ -1,4 +1,7 @@
-﻿internal class Program
+﻿using System;
+using System.Security.Cryptography.X509Certificates;
+
+internal class Program
 {
     private static void Main(string[] args)
     {
@@ -11,7 +14,10 @@
             Console.WriteLine("2: Exercício Sinal");
             Console.WriteLine("3: Exercício Divisão");
             Console.WriteLine("4: Exercício Médias");
-            Console.WriteLine("5: Sair");
+            Console.WriteLine("5: Exercício Calculadora IMC");
+            Console.WriteLine("6: Exercício Maior de 2 Números");
+            Console.WriteLine("7: Exercício Senha");
+            Console.WriteLine("8: Sair");
 
             int opcao = Convert.ToInt32(Console.ReadLine());
 
@@ -34,6 +40,18 @@
                     break;
 
                 case 5:
+                    ExercicioCalculadoraIMC();
+                    break;
+
+                case 6:
+                    ExercicioMaior2Numeros();
+                    break;
+
+                case 7:
+                    ExercicioSenha();
+                    break;
+
+                case 8:
                     Console.WriteLine("Saindo...");
                     exercicio = false;
                     break;
@@ -115,8 +133,8 @@
                 obterNotas = true;
         }
         obterNotas = false;
-        while (!obterNotas) 
-        { 
+        while (!obterNotas)
+        {
             Console.Write("Digite a segunda nota: ");
             nota2 = Math.Round(Convert.ToDecimal(Console.ReadLine()), 1);
             if (nota2 < 0 || nota2 > 10)
@@ -157,11 +175,11 @@
         decimal resultado = (nota1 + nota2 + nota3 + nota4) / 4;
         Console.WriteLine($"Você ficou com média: {resultado}");
 
-        if (resultado <5)
+        if (resultado < 5)
         {
             Console.WriteLine("Reprovado");
         }
-        if (resultado ==5 || resultado == 6)
+        if (resultado == 5 || resultado == 6)
         {
             Console.WriteLine("Em recuperação");
         }
@@ -169,7 +187,77 @@
         {
             Console.WriteLine("Aprovado");
         }
+    }
+    public static void ExercicioCalculadoraIMC()
+    {
+        Console.Write(" Digite seu peso: ");
+        double peso = Convert.ToDouble(Console.ReadLine());
+        Console.Write("Digite sua altura: ");
+        double altura = Convert.ToDouble(Console.ReadLine());
 
+
+        double imc = peso / (altura * altura);
+        Console.WriteLine($"Seu IMC é : {Math.Round(imc),2}");
+        if (imc < 17)
+        {
+            Console.WriteLine("Diagnostico: Muito abaixo do peso");
+        }
+        else if (imc >= 17 && imc <= 18.49)
+        {
+            Console.WriteLine("Diagnostico: Abaixo do peso");
+        }
+        else if (imc >= 18.5 && imc <= 24.99)
+        {
+            Console.WriteLine("Diagnostico: Peso normal");
+        }
+        else if (imc >= 25 && imc <= 29.99)
+        {
+            Console.WriteLine("Diagnostico: Acima do peso");
+        }
+        else if (imc >= 30 && imc <= 34.99)
+        {
+            Console.WriteLine("Diagnostico: Obesidade I");
+        }
+        else if (imc >= 35 && imc <= 39.99)
+        {
+            Console.WriteLine("Diagnostico: Obesidade II (Severa");
+        }
+        else if (imc > 40)
+        {
+            Console.WriteLine("Diagnostico: Obesidade III (Mórbida)");
+        }
+    }
+    public static void ExercicioMaior2Numeros()
+    {
+        Console.Write("Digite o primeiro número: ");
+        int num1 = Convert.ToInt32(Console.ReadLine());
+        Console.Write("Digite o segundo número: ");
+        int num2 = Convert.ToInt32(Console.ReadLine());
+
+        if (num1 > num2) 
+        {
+            Console.WriteLine($"O maior número é o: {num1}");
+        }
+        else if (num2 > num1) 
+        {
+            Console.WriteLine($"O maior número é o {num2}");
+        }
+    }
+
+    public static void ExercicioSenha()
+    {
+        Console.WriteLine("Olá, por favor digite a sua senha");
+        string senha = Console.ReadLine();
+
+        if (senha == "1234abcd")
+        {
+            Console.WriteLine("Acesso permitido");
+        }
+        else if (senha != "123abcd")
+        {
+            Console.WriteLine("Acesso negado");
+        }
     }
 }
+
 
