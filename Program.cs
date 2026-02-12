@@ -1,4 +1,7 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 
 internal class Program
@@ -17,7 +20,12 @@ internal class Program
             Console.WriteLine("5: Exercício Calculadora IMC");
             Console.WriteLine("6: Exercício Maior de 2 Números");
             Console.WriteLine("7: Exercício Senha");
-            Console.WriteLine("8: Sair");
+            Console.WriteLine("8: Exercício Doador de Sangue");
+            Console.WriteLine("9: Exercício Número par ou ímpar");
+            Console.WriteLine("10: Exercício Peso Ideal");
+            Console.WriteLine("11: Exercício Análise de Crédito");
+            Console.WriteLine("12: Sair");
+
 
             int opcao = Convert.ToInt32(Console.ReadLine());
 
@@ -52,6 +60,22 @@ internal class Program
                     break;
 
                 case 8:
+                    ExercicioDoadorDeSangue();
+                    break;
+
+                case 9:
+                    ExerciciosParImpar();
+                    break;
+
+                case 10:
+                    ExercicioPesoIdeal();
+                    break;
+
+                case 11:
+                    ExercicioAnaliseCredito();
+                    break;
+
+                case 12:
                     Console.WriteLine("Saindo...");
                     exercicio = false;
                     break;
@@ -234,11 +258,11 @@ internal class Program
         Console.Write("Digite o segundo número: ");
         int num2 = Convert.ToInt32(Console.ReadLine());
 
-        if (num1 > num2) 
+        if (num1 > num2)
         {
             Console.WriteLine($"O maior número é o: {num1}");
         }
-        else if (num2 > num1) 
+        else if (num2 > num1)
         {
             Console.WriteLine($"O maior número é o {num2}");
         }
@@ -257,6 +281,84 @@ internal class Program
         {
             Console.WriteLine("Acesso negado");
         }
+    }
+    public static void ExercicioDoadorDeSangue()
+    {
+        Console.Write("Digite a sua idade: ");
+        int idade = Convert.ToInt32(Console.ReadLine());
+
+        if (idade >= 18 && idade <= 67)
+        {
+            Console.WriteLine("Você pode ser doador de sangue");
+        }
+        else if (idade < 18 || idade > 67)
+        {
+            Console.WriteLine("Desculpe, você não pode ser doador de sangue");
+        }
+    }
+    public static void ExerciciosParImpar()
+    {
+        Console.Write("Digite o primeiro número: ");
+        int num1 = Convert.ToInt32(Console.ReadLine());
+
+        if (num1 % 2 == 0)
+        {
+            Console.WriteLine("Este número é par");
+        }
+        else
+        {
+            Console.WriteLine("Este número é impar");
+        }
+    }
+    public static void ExercicioPesoIdeal()
+
+    {
+        Console.Write("Digite a sua altura: ");
+        double altura = Convert.ToDouble(Console.ReadLine());
+        Console.WriteLine("Digite o seu sexo: (M) para masculino (F) para feminino");
+        string sexo = Console.ReadLine().ToUpper();
+
+        double pesoIdealMasculino = altura * 72.7 - 58.0;
+        double pesoIdealFeminino = altura * 62.1 - 44.7;
+
+        if (sexo == "F")
+        {
+            if (Convert.ToBoolean(pesoIdealFeminino) == true)
+            {
+                Console.WriteLine($"Seu peso ideal é {pesoIdealFeminino.ToString("#,##")}kg");
+            }
+        }
+        else if (sexo == "M")
+        {
+            Console.WriteLine($"Seu peso ideal é {pesoIdealMasculino.ToString("#,##")}kg");
+
+        }
+        
+    }
+    public static void ExercicioAnaliseCredito()
+    {
+        Console.Write("Por favor solicite o valor do empréstimo: ");
+        decimal valorEmprestimo = Convert.ToDecimal(Console.ReadLine());
+        Console.Write("Digite a quantidade de parcelas desejadas: ");
+        int numeroDeParcelas = Convert.ToInt32(Console.ReadLine());
+        Console.Write("Digite a sua renda mensal: ");
+        decimal rendaMensal = Convert.ToDecimal(Console.ReadLine());
+
+        double resultado = Convert.ToDouble((rendaMensal * 30) / 100);
+        double parcelaEmprestimo = Convert.ToDouble(valorEmprestimo / numeroDeParcelas);
+
+        if (resultado >= parcelaEmprestimo)
+        {
+            Console.WriteLine("\n>>>Empréstimo autorizado");
+        }
+        else
+        {
+            Console.WriteLine("\n>>>Emprestimo não autorizado");
+        }
+        Console.WriteLine($"\nValor do Emprestimo: {valorEmprestimo}");
+        Console.WriteLine($"Número de Parcelas: {numeroDeParcelas}");
+        Console.WriteLine($"Valor da Parcela: {parcelaEmprestimo}");
+        Console.WriteLine($"Valor da Renda Mensal: {rendaMensal}");
     }
 }
 
