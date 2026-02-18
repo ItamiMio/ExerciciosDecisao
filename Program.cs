@@ -24,7 +24,9 @@ internal class Program
             Console.WriteLine("9: Exercício Número par ou ímpar");
             Console.WriteLine("10: Exercício Peso Ideal");
             Console.WriteLine("11: Exercício Análise de Crédito");
-            Console.WriteLine("12: Sair");
+            Console.WriteLine("12: Exercício Triângulo");
+            Console.WriteLine("13: Exercício Bhaskara");
+            Console.WriteLine("14: Sair");
 
 
             int opcao = Convert.ToInt32(Console.ReadLine());
@@ -76,6 +78,14 @@ internal class Program
                     break;
 
                 case 12:
+                    ExercicioHeronSeTriangulo();
+                    break;
+
+                case 13:
+                    ExercicioBhaskara();
+                    break;
+
+                case 14:
                     Console.WriteLine("Saindo...");
                     exercicio = false;
                     break;
@@ -298,10 +308,10 @@ internal class Program
     }
     public static void ExerciciosParImpar()
     {
-        Console.Write("Digite o primeiro número: ");
-        int num1 = Convert.ToInt32(Console.ReadLine());
+        Console.Write("Digite o número: ");
+        int num = Convert.ToInt32(Console.ReadLine());
 
-        if (num1 % 2 == 0)
+        if (num % 2 == 0)
         {
             Console.WriteLine("Este número é par");
         }
@@ -333,7 +343,7 @@ internal class Program
             Console.WriteLine($"Seu peso ideal é {pesoIdealMasculino.ToString("#,##")}kg");
 
         }
-        
+
     }
     public static void ExercicioAnaliseCredito()
     {
@@ -359,6 +369,118 @@ internal class Program
         Console.WriteLine($"Número de Parcelas: {numeroDeParcelas}");
         Console.WriteLine($"Valor da Parcela: {parcelaEmprestimo}");
         Console.WriteLine($"Valor da Renda Mensal: {rendaMensal}");
+    }
+    public static void ExercicioHeronSeTriangulo()
+    {
+        Console.WriteLine("Informe 3 números decimais maiores que zero");
+        decimal num1 = 0, num2 = 0, num3 = 0;
+        bool obterNum = false;
+        while (!obterNum)
+        {
+            Console.Write("1º número: ");
+            num1 = Math.Round(Convert.ToDecimal(Console.ReadLine()) ,1);
+            if (num1 < 0)
+            {
+                Console.WriteLine("Digite somente números maiores que 0");
+                obterNum= false;
+            }
+
+            else
+                obterNum = true;
+        }
+        obterNum = false;
+        while (!obterNum) 
+        {
+            Console.Write("2º número: ");
+            num2 = Math.Round(Convert.ToDecimal(Console.ReadLine()) ,1);
+            if (num2 < 0) 
+            {
+                Console.WriteLine("Digite somente números maiores que 0");
+                obterNum= false;
+            }
+            else
+                obterNum = true;
+        }
+        obterNum = false;
+        while (!obterNum)
+        {
+            Console.Write("3º número: ");
+            num3 = Math.Round(Convert.ToDecimal(Console.ReadLine()), 1);
+            if (num3 < 0)
+            {
+                Console.WriteLine("Digite somente números maiores que 0");
+                obterNum = false;
+            }
+            else
+                obterNum = true;
+        }
+        if (num1 < (num2 + num3) &&
+            num1 > Math.Abs(num2 - num3) &&
+            num2 < (num1 + num3) &&
+            num2 > Math.Abs(num1 - num3) &&
+            num3 < (num1 + num2) &&
+            num3 > Math.Abs(num1 - num2))
+        {
+            if (num1 == num2 && num2 == num3 && num3 == num1)
+                Console.WriteLine("Triângulo Equilátero");
+            else if (num1 != num2 && num2 != num3 && num3 != num1)
+                Console.WriteLine("Triângulo Escaleno");
+            else
+                Console.WriteLine("Triângulo Isósceles");
+
+            decimal semiperimetro = (num1 + num2 + num3) / 2;
+            decimal conta1 = semiperimetro - num1;
+            decimal conta2 = semiperimetro - num2;
+            decimal conta3 = semiperimetro - num3;
+            decimal resultado = semiperimetro * conta1 * conta2 * conta3;
+            resultado = (decimal)Math.Sqrt(Convert.ToDouble(resultado));
+            Console.WriteLine($"A área do triângulo pelo Teorema de Heron é: {resultado}");
+        }
+        else
+            Console.WriteLine("Não é um triângulo");
+    }
+    public static void ExercicioBhaskara()
+    {
+        Console.WriteLine("Informe 3 valores:");
+        double valorA = 0;
+        bool valorValido = false;
+        while (!valorValido)
+        {
+            Console.Write("1º valor: ");
+            valorA = Convert.ToDouble(Console.ReadLine());
+            if (valorA == 0)
+            {
+                Console.WriteLine("Não é uma equação de segundo grau");
+                valorValido = false;
+            }
+            else
+                valorValido = true;
+        }
+        Console.Write("2º valor: ");
+        double valorB = Convert.ToDouble(Console.ReadLine());
+        Console.Write("3º valor: ");
+        double valorC = Convert.ToDouble(Console.ReadLine());
+        double valorDelta1 = valorB * valorB;
+        double valorDelta2 = 4 * valorA * valorC;
+        double delta = 0;
+        double x1 = 0;
+        double x2 = 0;
+        
+        delta = valorDelta1 - valorDelta2;
+        if (delta < 0)
+        {
+            Console.WriteLine($"Como delta é = {delta}, a equação não possui raízes reais");
+        }
+        else
+        {
+            x1 = ((valorB * -1) + Math.Sqrt(delta)) / (2 * valorA);
+            x2 = ((valorB * -1) - Math.Sqrt(delta)) / (2 * valorA);
+            Console.WriteLine($"As raízes são: x1 = {x1} e x2 = {x2}");
+        }
+    }
+    public static void ExercicioMaiorDeTres()
+    {
+        //to do
     }
 }
 
